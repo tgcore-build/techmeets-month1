@@ -40,10 +40,12 @@
       display: flex;
       gap: 8px;
       margin-bottom: 28px;
+      flex-wrap: wrap;
     }
 
     .input-row input {
       flex: 1;
+      min-width: 0;
       padding: 12px 16px;
       border: 2px solid #e0e0e0;
       border-radius: 8px;
@@ -53,6 +55,21 @@
     }
 
     .input-row input:focus {
+      border-color: #4a90e2;
+    }
+
+    .input-row select {
+      padding: 12px 10px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #fff;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .input-row select:focus {
       border-color: #4a90e2;
     }
 
@@ -88,11 +105,53 @@
       border-radius: 10px;
       padding: 14px 16px;
       transition: background-color 0.2s;
+      border-left: 5px solid #e0e0e0;
     }
 
     #task-list li:hover {
       background-color: #eef2f7;
     }
+
+    #task-list li.priority-high {
+      border-left-color: #e53935;
+      background-color: #fff5f5;
+    }
+
+    #task-list li.priority-high:hover {
+      background-color: #ffe8e8;
+    }
+
+    #task-list li.priority-medium {
+      border-left-color: #f9a825;
+      background-color: #fffde7;
+    }
+
+    #task-list li.priority-medium:hover {
+      background-color: #fff8d0;
+    }
+
+    #task-list li.priority-low {
+      border-left-color: #1e88e5;
+      background-color: #f0f6ff;
+    }
+
+    #task-list li.priority-low:hover {
+      background-color: #deeeff;
+    }
+
+    .priority-badge {
+      font-size: 11px;
+      font-weight: bold;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-right: 10px;
+      flex-shrink: 0;
+      color: #fff;
+    }
+
+    .priority-badge.high { background-color: #e53935; }
+    .priority-badge.medium { background-color: #f9a825; color: #333; }
+    .priority-badge.low { background-color: #1e88e5; }
 
     .task-text {
       flex: 1;
@@ -151,6 +210,11 @@
 
     <div class="input-row">
       <input type="text" id="task-input" placeholder="タスクを入力...">
+      <select id="priority-select">
+        <option value="high">高</option>
+        <option value="medium" selected>中</option>
+        <option value="low">低</option>
+      </select>
       <button onclick="addTask()">追加</button>
     </div>
 
@@ -169,10 +233,11 @@
 
     function addTask() {
       const input = document.getElementById('task-input');
+      const prioritySelect = document.getElementById('priority-select');
       const text = input.value.trim();
       if (!text) return;
 
-      tasks.push({ text: text, done: false });
+      tasks.push({ text: text, done: false, priority: prioritySelect.value });
       input.value = '';
       input.focus();
       render();
@@ -203,8 +268,15 @@
         return;
       }
 
+      const priorityLabel = { high: '高', medium: '中', low: '低' };
+
       tasks.forEach(function (task, index) {
         const li = document.createElement('li');
+        li.className = 'priority-' + (task.priority || 'medium');
+
+        const badge = document.createElement('span');
+        badge.className = 'priority-badge ' + (task.priority || 'medium');
+        badge.textContent = priorityLabel[task.priority] || '中';
 
         const span = document.createElement('span');
         span.className = 'task-text' + (task.done ? ' done' : '');
@@ -216,6 +288,7 @@
         btn.textContent = '削除';
         btn.onclick = function () { deleteTask(index); };
 
+        li.appendChild(badge);
         li.appendChild(span);
         li.appendChild(btn);
         list.appendChild(li);
