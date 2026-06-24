@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スライドショー</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .slideshow {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 24px;
+      width: 660px;
+      max-width: 95vw;
+    }
+
+    .slide-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    button {
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover:not(:disabled) {
+      background: #555;
+    }
+
+    button:disabled {
+      background: #ccc;
+      cursor: default;
+    }
+
+    .counter {
+      font-size: 15px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<div class="slideshow">
+  <img id="slide" class="slide-image" src="" alt="スライド">
+  <div class="controls">
+    <button id="prev" onclick="changeSlide(-1)">前へ</button>
+    <span class="counter" id="counter"></span>
+    <button id="next" onclick="changeSlide(1)">次へ</button>
+  </div>
+</div>
+
+<script>
+  const images = [
+    'https://placehold.jp/600x300.png',
+    'https://placehold.jp/600x300.png',
+    'https://placehold.jp/600x300.png',
+    'https://placehold.jp/600x300.png',
+    'https://placehold.jp/600x300.png',
+  ];
+
+  let current = 0;
+
+  function update() {
+    document.getElementById('slide').src = images[current];
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + images.length;
+    document.getElementById('prev').disabled = current === 0;
+    document.getElementById('next').disabled = current === images.length - 1;
+  }
+
+  function changeSlide(dir) {
+    current = Math.max(0, Math.min(images.length - 1, current + dir));
+    update();
+  }
+
+  update();
+</script>
+
+</body>
+</html>
