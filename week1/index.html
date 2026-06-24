@@ -73,6 +73,20 @@
       border-color: #4a90e2;
     }
 
+    .input-row input[type="date"] {
+      padding: 12px 10px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .input-row input[type="date"]:focus {
+      border-color: #4a90e2;
+    }
+
     .input-row button {
       padding: 12px 20px;
       background-color: #4a90e2;
@@ -153,8 +167,14 @@
     .priority-badge.medium { background-color: #f9a825; color: #333; }
     .priority-badge.low { background-color: #1e88e5; }
 
-    .task-text {
+    .task-info {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .task-text {
       font-size: 15px;
       color: #333;
       cursor: pointer;
@@ -165,6 +185,25 @@
     .task-text.done {
       text-decoration: line-through;
       color: #aaa;
+    }
+
+    .due-date {
+      font-size: 12px;
+      color: #999;
+      margin-top: 3px;
+    }
+
+    #task-list li.overdue {
+      background-color: #ffe0e0 !important;
+    }
+
+    #task-list li.overdue:hover {
+      background-color: #ffd0d0 !important;
+    }
+
+    #task-list li.overdue .due-date {
+      color: #c62828;
+      font-weight: bold;
     }
 
     .delete-btn {
@@ -215,6 +254,7 @@
         <option value="medium" selected>中</option>
         <option value="low">低</option>
       </select>
+      <input type="date" id="due-date-input">
       <button onclick="addTask()">追加</button>
     </div>
 
@@ -234,11 +274,13 @@
     function addTask() {
       const input = document.getElementById('task-input');
       const prioritySelect = document.getElementById('priority-select');
+      const dueDateInput = document.getElementById('due-date-input');
       const text = input.value.trim();
       if (!text) return;
 
-      tasks.push({ text: text, done: false, priority: prioritySelect.value });
+      tasks.push({ text: text, done: false, priority: prioritySelect.value, dueDate: dueDateInput.value || null });
       input.value = '';
+      dueDateInput.value = '';
       input.focus();
       render();
     }
@@ -269,19 +311,35 @@
       }
 
       const priorityLabel = { high: '高', medium: '中', low: '低' };
+      const today = new Date().toISOString().split('T')[0];
 
       tasks.forEach(function (task, index) {
+        const isOverdue = task.dueDate && task.dueDate < today && !task.done;
+
         const li = document.createElement('li');
-        li.className = 'priority-' + (task.priority || 'medium');
+        li.className = 'priority-' + (task.priority || 'medium') + (isOverdue ? ' overdue' : '');
 
         const badge = document.createElement('span');
         badge.className = 'priority-badge ' + (task.priority || 'medium');
         badge.textContent = priorityLabel[task.priority] || '中';
 
+        const taskInfo = document.createElement('div');
+        taskInfo.className = 'task-info';
+
         const span = document.createElement('span');
         span.className = 'task-text' + (task.done ? ' done' : '');
         span.textContent = task.text;
         span.onclick = function () { toggleTask(index); };
+
+        taskInfo.appendChild(span);
+
+        if (task.dueDate) {
+          const dateSpan = document.createElement('span');
+          dateSpan.className = 'due-date';
+          const formatted = task.dueDate.replace(/(\d{4})-(\d{2})-(\d{2})/, '$1/$2/$3');
+          dateSpan.textContent = (isOverdue ? '⚠ 期限切れ: ' : '期限: ') + formatted;
+          taskInfo.appendChild(dateSpan);
+        }
 
         const btn = document.createElement('button');
         btn.className = 'delete-btn';
@@ -289,7 +347,7 @@
         btn.onclick = function () { deleteTask(index); };
 
         li.appendChild(badge);
-        li.appendChild(span);
+        li.appendChild(taskInfo);
         li.appendChild(btn);
         list.appendChild(li);
       });
