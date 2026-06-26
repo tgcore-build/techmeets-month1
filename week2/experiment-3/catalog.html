@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品カタログ</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #f0f2f5;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      padding: 48px 24px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      color: #1a1a2e;
+      margin-bottom: 36px;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+
+    .card {
+      width: 220px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    .card-body .product-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+
+    .card-body .price {
+      font-size: 18px;
+      font-weight: 700;
+      color: #4a90e2;
+    }
+
+    .card-body .price span {
+      font-size: 13px;
+      font-weight: 400;
+      color: #999;
+      margin-left: 2px;
+    }
+
+    .card-body .description {
+      font-size: 13px;
+      color: #777;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>商品カタログ</h1>
+  <div class="grid">
+    <div class="card">
+      <img src="https://placehold.jp/220x180.png" alt="商品画像">
+      <div class="card-body">
+        <p class="product-name">ワイヤレスイヤホン</p>
+        <p class="description">ノイズキャンセリング搭載。最大30時間再生対応。</p>
+        <p class="price">¥8,980<span>（税込）</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://placehold.jp/220x180.png" alt="商品画像">
+      <div class="card-body">
+        <p class="product-name">メカニカルキーボード</p>
+        <p class="description">青軸採用。テンキーレスでコンパクト設計。</p>
+        <p class="price">¥14,500<span>（税込）</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://placehold.jp/220x180.png" alt="商品画像">
+      <div class="card-body">
+        <p class="product-name">ポータブル充電器</p>
+        <p class="description">20,000mAh大容量。USB-C急速充電対応。</p>
+        <p class="price">¥4,280<span>（税込）</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://placehold.jp/220x180.png" alt="商品画像">
+      <div class="card-body">
+        <p class="product-name">USBハブ 7ポート</p>
+        <p class="description">USB3.0×5、USB-C×2。バスパワー駆動。</p>
+        <p class="price">¥3,600<span>（税込）</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://placehold.jp/220x180.png" alt="商品画像">
+      <div class="card-body">
+        <p class="product-name">ウェブカメラ HD</p>
+        <p class="description">1080p対応。内蔵マイク搭載でWeb会議に最適。</p>
+        <p class="price">¥6,780<span>（税込）</span></p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://placehold.jp/220x180.png" alt="商品画像">
+      <div class="card-body">
+        <p class="product-name">デスクライト LED</p>
+        <p class="description">明るさ10段階調整。目に優しいフリッカーフリー設計。</p>
+        <p class="price">¥5,200<span>（税込）</span></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
