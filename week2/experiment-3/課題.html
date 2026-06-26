@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人物紹介カード一覧</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #f0f2f5;
+      min-height: 100vh;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      padding: 48px 24px;
+    }
+
+    .card-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 32px 24px;
+      width: 240px;
+      text-align: center;
+    }
+
+    .card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 14px;
+    }
+
+    .card .name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #333333;
+      margin-bottom: 8px;
+    }
+
+    .card .comment {
+      font-size: 13px;
+      color: #333333;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-list">
+    <div class="card">
+      <img src="https://placehold.jp/80x80.png" alt="アイコン">
+      <p class="name">山田 太郎</p>
+      <p class="comment">コードを書くことと、おいしいコーヒーが好きです。</p>
+    </div>
+    <div class="card">
+      <img src="https://placehold.jp/80x80.png" alt="アイコン">
+      <p class="name">鈴木 花子</p>
+      <p class="comment">デザインとフロントエンドを担当しています。</p>
+    </div>
+    <div class="card">
+      <img src="https://placehold.jp/80x80.png" alt="アイコン">
+      <p class="name">田中 次郎</p>
+      <p class="comment">バックエンドとインフラが得意分野です。</p>
+    </div>
+    <div class="card">
+      <img src="https://placehold.jp/80x80.png" alt="アイコン">
+      <p class="name">佐藤 三郎</p>
+      <p class="comment">データ分析と機械学習を専門にしています。</p>
+    </div>
+  </div>
+</body>
+</html>
