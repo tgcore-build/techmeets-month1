@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人物紹介カード</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 36px 32px;
+      width: 320px;
+      text-align: center;
+    }
+
+    .card img {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 16px;
+    }
+
+    .card .name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+
+    .card .comment {
+      font-size: 14px;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    .card button {
+      margin-top: 20px;
+      padding: 10px 28px;
+      background: #4a90e2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .card button:hover {
+      background: #357abd;
+    }
+
+    #message {
+      margin-top: 14px;
+      font-size: 14px;
+      color: #4a90e2;
+      min-height: 20px;
+    }
+
+    #count {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #333333;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="https://placehold.jp/88x88.png" alt="アイコン">
+    <p class="name">山田 太郎</p>
+    <p class="comment">コードを書くことと、おいしいコーヒーが好きです。</p>
+    <button onclick="showMessage()">メッセージを表示</button>
+    <p id="message"></p>
+    <p id="count"></p>
+  </div>
+
+  <script>
+    let completedCount = 0;
+
+    function showMessage() {
+      document.getElementById('message').textContent = 'ボタンがクリックされました！';
+      completedCount++;
+      document.getElementById('count').textContent = '完了件数: ' + completedCount + ' 件';
+    }
+  </script>
+</body>
+</html>
